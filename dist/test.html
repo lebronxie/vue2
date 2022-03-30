@@ -1,37 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
   <div id="app">
-    <button @click="handleClick">hello {{name}}</button>
+    <p>{{ computedName }}</p>
+    <p>{{ computedName }}</p>
+    <p>{{ computedName }}</p>
+    <p>{{ computedName }}</p>
+    <p>{{ methodName() }}</p>
+    <p>{{ methodName() }}</p>
   </div>
   <script src="./vue.js"></script>
   <script>
-
-   const app = new Vue({
-    data() {
-      return {
-        name:"lebron"
+    const app = new Vue({
+      data() {
+        return {
+          name: "法外狂徒张三",
+        }
+      },
+      computed: {
+        computedName() {
+          debugger
+          console.error('computed 我执行了')
+          return this.name + '--computedName'
+        }
+      },
+      methods: {
+        methodName() {
+          console.error('methods 我执行了')
+          return this.name + '--methodName'
+        }
       }
-    },
-methods: {
-  handleClick(){
-    this.name = parseInt(Math.random() * 100000000000)
-  }
-},
-    beforeCreate() {
-      console.log('app beforeCreate-->',this)
-    },
-    created() {
-      console.log('app created-->',this)
-    },
     })
     app.$mount("#app")
+
   </script>
 </body>
+
 </html>
