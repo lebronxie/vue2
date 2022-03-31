@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- <app-com/> -->
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    const app = {
+      template: `<h1>我是App{{ name }}</h1>`,
+      data() {
+        return {
+          name: "App"
+        }
+      },
+    }
+    //  definition = this.options._base.extend(definition);   this.options._base==Vue   
+    // Vue.extend
+    const App = Vue.component('appCom', app)
+    const App1 = Vue.extend(app)
+    /*
+   App===App1 true 同一个引用 app 对象 如果分别传入 
+   {
+      template: `<h1>我是App{{ name }}</h1>`,
+      data() {
+        return {
+          name: "App"
+        }
+      },
+    }
+    App===App1 false
+     */ 
+    new Vue({
+      render(h) {
+        console.log(h(App))
+        console.log(h(App1))
+
+        return h(App)
+        // h('h1',{
+        //   id:'test'
+        // },'我是h1')
+        // return h('h1',{
+        //   id:'test'
+        // },'我是h1')
+      },
+    }).$mount("#app")
+
+  </script>
+</body>
+
+</html>
