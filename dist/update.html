@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <ul>
+      <li v-for="(item,index) in tableData" :key="item.id" @click="handleClick(item,index)">{{ item.name }} -
+        {{ item.age }}
+      </li>
+    </ul>
+    <button @click="handlePush">push</button>
+    <test-comp @handle-test="handleTest" :parent-data="parentData"></test-comp>
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    Vue.component('test-comp', {
+      props: ['parentData'],
+      template: `<h1 @click="test">{{  parentData }}</h1>`,
+      watch: {
+        parentData(val, newVal) {
+          console.log(val, newVal)
+          // this.$emit('handle-test', Math.random())
+        }
+      },
+      methods: {
+        test() {
+          console.log(this)
+          this.$emit('handle-test', '111')
+        }
+      }
+    })
+
+    const app = new Vue({
+      data() {
+        return {
+          tableData: [{
+            name: '小花',
+            age: 28,
+            id: 1
+          }, {
+            name: '小明',
+            age: 25,
+            id: 2
+          }],
+          parentData: 'Lebron'
+        }
+      },
+      watch: {
+        // parentData(val, newVal) {
+        //   console.log('-->', val, newVal)
+        //   // this.$emit('handle-test', Math.random())
+        //   this.parentData = Math.random()
+        // }
+      },
+      methods: {
+        handlePush() {
+          this.tableData.push({
+            name: '小刘',
+            age: 20,
+            id: Math.random()
+          })
+        },
+        handleClick(item, index) {
+          item.name = 'test'
+          this.parentData = '父亲改了'
+        },
+        handleTest(e) {
+          this.parentData = e
+        }
+      }
+    })
+    app.$mount("#app")
+
+  </script>
+</body>
+
+</html>
