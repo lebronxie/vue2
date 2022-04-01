@@ -16,23 +16,25 @@
       </li>
     </ul>
     <button @click="handlePush">push</button>
-    <test-comp @handle-test="handleTest" :parent-data="parentData"></test-comp>
+    <test-comp @handle-test="handleTest" :parent-data.sync="parentData"></test-comp>
   </div>
   <script src="./vue.js"></script>
   <script>
     Vue.component('test-comp', {
       props: ['parentData'],
       template: `<h1 @click="test">{{  parentData }}</h1>`,
-      watch: {
-        parentData(val, newVal) {
-          console.log(val, newVal)
-          // this.$emit('handle-test', Math.random())
-        }
-      },
+      // watch: {
+      //   parentData(val, newVal) {
+      //     console.log(val, newVal)
+      //     // this.$emit('handle-test', Math.random())
+      //   }
+      // },
       methods: {
         test() {
           console.log(this)
-          this.$emit('handle-test', '111')
+          debugger
+          this.$emit("update:parentData", '儿子改了')
+          // this.$emit('handle-test', '111')
         }
       }
     })
