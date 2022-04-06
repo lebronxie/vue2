@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    {{obj.person.name}}
+    <button @click="handleClick">push</button>
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          obj: {
+            person: {
+              name: "lebron"
+            }
+          }
+        }
+      },
+      methods: {
+        handleClick() {
+          this.obj.person.name = 'hhh'
+        }
+      },
+      watch: {
+        // arrayTable(newVal, oldVal) {
+        //   console.log('--->', newVal, oldVal)
+        // }
+        "obj.person.name": {
+          handler(newVal, oldVal) {
+            console.log('--->', newVal, oldVal)
+          },
+          deep: true
+        },
+        "obj": {
+          handler(newVal, oldVal) {
+            debugger
+            console.log('--->', newVal.person.name, oldVal.person.name)
+          },
+          deep: true
+        }
+      }
+    })
+
+  </script>
+</body>
+
+</html>
