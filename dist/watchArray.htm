@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <ul>
+      <li v-for="item in arrayTable">{{ item.name }}</li>
+    </ul>
+    <button @click="handleClick">push</button>
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          arrayTable: [{
+            name: 1
+          }, {
+            name: 2
+          }]
+        }
+      },
+      methods: {
+        handleClick() {
+          this.arrayTable[1].name = 'hhh'
+        }
+      },
+      watch: {
+        // arrayTable(newVal, oldVal) {
+        //   console.log('--->', newVal, oldVal)
+        // }
+        arrayTable: {
+          handler(newVal, oldVal) {
+            console.log('--->', newVal, oldVal)
+          },
+          // deep: true
+        }
+      }
+    })
+
+  </script>
+</body>
+
+</html>

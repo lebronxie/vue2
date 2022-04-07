@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <div :id="name">abc</div>
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    var extendCom = Vue.extend({
+      name: "extendCom",
+      render(h) {
+        return h('h1', {
+          class: "com-class"
+        }, '我是extend h1')
+      },
+    })
+    // var extendCom = Vue.component('extend-com1', {
+    //   name: "extendCom",
+    //   render(h) {
+    //     return h('h1', {
+    //       class: "com-class"
+    //     }, '我是extend h1')
+    //   },
+    // })
+    console.dir(extendCom)
+    const app = new Vue({
+      el: "#app",
+      data() {
+        return {
+          name: "app"
+        }
+      },
+      render(h) {
+        console.dir(extendCom)
+
+        return h(extendCom)
+      }
+
+    })
+
+  </script>
+</body>
+
+</html>
